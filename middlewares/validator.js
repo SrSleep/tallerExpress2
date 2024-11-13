@@ -4,7 +4,10 @@ const validator = (schema) => [
         if (validation.error) {
             return res.status(400).json({
                 success: false,
-                message: validation.error.details.map(error => error.message)
+                message: validation.error.details.map(error => ({
+                    field: error.path.join('.'),
+                    message: error.message
+                }))
             })
         }
         return next();

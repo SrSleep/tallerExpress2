@@ -1,4 +1,4 @@
-const error_handler = (error,req,res,next) => {
+const error_handler = (error,req,res) => {
     console.log(error);
     return res.status(500).json({
         success: false,

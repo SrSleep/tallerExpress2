@@ -14,7 +14,9 @@ const updateUser = async (req, res, next) => {
             },
             {new: true}
         );
-        res.status(200).json(updatedUser);
+        res.status(200).json({
+            response: updatedUser
+        });
 
 
     } catch (error) {
