@@ -15,7 +15,7 @@ let updateTransaction = async (req, res, next) => {
             },
             {new: true}
         );
-        res.status(200).json({
+        return res.status(200).json({
             response: upd
         });
 

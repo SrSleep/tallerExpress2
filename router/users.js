@@ -22,6 +22,6 @@ const userRouter = Router();
 userRouter.get('/all', allUsers)
 userRouter.post('/register', validator(schemaUserCreate), accountExists, createHash, register)
 userRouter.put('/update', validator(schemaUpdate), accountNotExists, createHash, updateUser)
-userRouter.delete('/delete',validator(schemaDelete),deleteOne)
+userRouter.delete('/delete', validator(schemaDelete), deleteOne)
 
 export default userRouter;

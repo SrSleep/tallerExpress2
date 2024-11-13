@@ -1,10 +1,11 @@
 import Joi from 'joi';
 
 const schema = Joi.object({
-    _id: Joi.string().pattern(/^[0-9a-fA-F]{24}$/).required().messages({
+    _id: Joi.string().hex().required().messages({
         'string.base': 'The id user field must be a string.',
         'string.empty': 'The id user field is required.',
-        'string.pattern.base': 'The id user field must be a valid 24-character hexadecimal string (ObjectId).'
+        'string.hex': 'The id user field must be a valid 24-character hexadecimal string (ObjectId).',
+        'any.required': 'The value is required.'
     })
 });
 
