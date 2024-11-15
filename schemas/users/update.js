@@ -1,47 +1,44 @@
-import joi from 'joi-oid';
+import Joi from 'joi';
 
-const schema = joi.object({
-    name: joi.string()
-        .required()
-        .pattern(/^[A-Za-z ]+$/)
-        .messages({
-            'string.base': 'Name must be a string.',
-            'string.pattern.base': 'Name must only contain letters (no numbers or special characters).',
-            'string.empty': 'Name is required.',
-            'string.min': 'Name must have at least 3 characters.',
-            'string.max': 'Name cannot be more than 30 characters.'
-        }),
+const schema = Joi.object({
+    _id: Joi.string().hex().length(24).required().messages({
+        'string.base': 'The id transaction field must be a string.',
+        'string.empty': 'The id transaction field is required.',
+        'string.hex': 'The id transaction field must be a valid 24-character hexadecimal string (ObjectId).',
+        'string.length': 'The id transaction field must be a valid 24-character hexadecimal.',
+        'any.required': 'The value is required.'
+    }),
 
-    email: joi.string()
-        .email()
-        .required()
-        .messages({
-            'string.base': 'Email must be a string.',
-            'string.email': 'Invalid email format.',
-            'string.empty': 'Email is required.'
-        }),
+    name: Joi.string().required().pattern(/^[A-Za-z ]+$/).messages({
+        'string.base': 'Name must be a string.',
+        'string.pattern.base': 'Name must only contain letters (no numbers or special characters).',
+        'string.empty': 'Name is required.',
+        'any.required': 'The value is required.'
+    }),
 
-    address: joi.string()
-        .required()
-        .messages({
-            'string.base': 'Address must be a string.',
-            'string.empty': 'Address is required.'
-        }),
+    email: Joi.string().email().required().messages({
+        'string.base': 'Email must be a string.',
+        'string.email': 'Invalid email format.',
+        'string.empty': 'Email is required.',
+        'any.required': 'The value is required.'
+    }),
 
-    phone: joi.number()
-        .required()
-        .min(1000000000)
-        .max(9999999999)
-        .messages({
-            'number.base': 'Phone must be a number.',
-            'number.empty': 'Phone is required.',
-            'number.min': 'The number must be exactly 10 digits long.',
-            'number.max': 'The number must be exactly 10 digits long.'
-        }),
+    address: Joi.string().required().messages({
+        'string.base': 'Address must be a string.',
+        'string.empty': 'Address is required.',
+        'any.required': 'The value is required.'
+    }),
 
-    password: joi.string()
-        .required()
-        .min(8)
+    phone: Joi.number().integer().required().min(1000000000).max(9999999999).messages({
+        'number.base': 'Phone must be a number.',
+        'number.integer': 'The cost must be an integer (without decimal points or commas).',
+        'number.empty': 'Phone is required.',
+        'number.min': 'The number must be exactly 10 digits long.',
+        'number.max': 'The number must be exactly 10 digits long.',
+        'any.required': 'The value is required.'
+    }),
+
+    password: Joi.string().required().min(8)
         .pattern(/^[a-zA-Z0-9!@#$%^&*(),.?":{}|<>-_]+$/) // Asegura que la contraseña tenga caracteres válidos
         .pattern(/[a-z]/) // Al menos una letra minúscula
         .pattern(/[A-Z]/) // Al menos una letra mayúscula
@@ -52,6 +49,7 @@ const schema = joi.object({
             'string.min': 'Password must be at least 8 characters long.',
             'string.max': 'Password must be no longer than 128 characters.',
             'string.pattern.base': 'Password must contain at least one uppercase letter, one lowercase letter, and one number.',
+            'any.required': 'The value is required.'
         })
 
 })

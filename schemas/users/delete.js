@@ -1,15 +1,14 @@
-import joi from 'joi-oid';
+import Joi from 'joi';
 
-const schema = joi.object({
+const schema = Joi.object({
 
-    email: joi.string()
-        .email()
-        .required()
-        .messages({
-            'string.base': 'Email must be a string.',
-            'string.email': 'Invalid email format.',
-            'string.empty': 'Email is required.'
-        }),
+    _id: Joi.string().hex().length(24).required().messages({
+        'string.base': 'The id transaction field must be a string.',
+        'string.empty': 'The id transaction field is required.',
+        'string.hex': 'The id transaction field must be a valid hexadecimal string (ObjectId).',
+        'string.length': 'The id transaction field must be a valid 24-character hexadecimal.',
+        'any.required': 'The value is required.'
+    }),
 })
 
 export default schema;

@@ -2,8 +2,9 @@ import Joi from 'joi';
 
 const propertySchema = Joi.object({
 
-    name: Joi.string().required().messages({
+    name: Joi.string().pattern(/^[A-Za-z ]+$/).required().messages({
         'string.base': 'The name must be a string.',
+        'string.pattern.base': 'Name must only contain letters (no numbers or special characters).',
         'string.empty': 'The name cannot be empty.',
         'any.required': 'The name is required.'
     }),

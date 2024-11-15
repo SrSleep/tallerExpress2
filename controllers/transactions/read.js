@@ -20,7 +20,7 @@ let allTransactions = async (req, res, next) => {
         if (user) {
             query.user = user;
         }
-        let all = await Transaction.find(query).populate('user','name').exec();
+        let all = await Transaction.find(query).populate('user', 'name').exec();
         return res.status(200).json({
             response: all
         })

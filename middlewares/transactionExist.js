@@ -1,6 +1,6 @@
 import Transaction from "../models/Transaction.js";
 
-export default async (req,res,next) => {
+export default async (req, res, next) => {
     try {
         let account = await Transaction.findOne({_id: req.body._id})
         if (!account) {

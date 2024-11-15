@@ -3,9 +3,9 @@ import "../../models/User.js"
 
 let updateProperty = async (req, res, next) => {
     try {
-        let {_id,name, category,value,user } =req.body;
+        let {_id, name, category, value, user} = req.body;
 
-        let  upd =await Property.findOneAndUpdate(
+        let upd = await Property.findOneAndUpdate(
             {_id},
             {
                 name,
@@ -19,7 +19,7 @@ let updateProperty = async (req, res, next) => {
             response: upd
         });
 
-    }catch(error) {
+    } catch (error) {
         next(error)
     }
 }

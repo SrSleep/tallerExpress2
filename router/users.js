@@ -11,6 +11,7 @@ import validator from "../middlewares/validator.js";
 import accountExists from "../middlewares/accountExists.js";
 import createHash from "../middlewares/createHash.js";
 import accountNotExists from "../middlewares/accountNotExists.js";
+import passport from "../middlewares/passport.js";
 
 //import schemas
 import schemaUserCreate from "../schemas/users/create.js"
@@ -19,9 +20,9 @@ import schemaDelete from "../schemas/users/delete.js"
 
 
 const userRouter = Router();
-userRouter.get('/all', allUsers)
-userRouter.post('/register', validator(schemaUserCreate), accountExists, createHash, register)
-userRouter.put('/update', validator(schemaUpdate), accountNotExists, createHash, updateUser)
-userRouter.delete('/delete', validator(schemaDelete), deleteOne)
+userRouter.get('/all', passport.authenticate('jwt', {session: false}), allUsers)
+userRouter.post('/register', passport.authenticate('jwt', {session: false}), validator(schemaUserCreate), accountExists, createHash, register)
+userRouter.put('/update', passport.authenticate('jwt', {session: false}), validator(schemaUpdate), accountNotExists, createHash, updateUser)
+userRouter.delete('/delete', passport.authenticate('jwt', {session: false}), validator(schemaDelete), accountNotExists, deleteOne)
 
 export default userRouter;

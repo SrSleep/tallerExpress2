@@ -10,4 +10,5 @@ async function conectionToDataBase() {
         console.log(error);
     }
 }
+
 conectionToDataBase();

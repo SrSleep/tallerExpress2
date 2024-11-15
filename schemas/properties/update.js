@@ -14,8 +14,9 @@ const propertySchema = Joi.object({
         'any.required': 'The name is required.'
     }),
 
-    category: Joi.string().required().messages({
+    category: Joi.string().pattern(/^[A-Za-z ]+$/).required().messages({
         'string.base': 'The category must be a string.',
+        'string.pattern.base': 'category must only contain letters (no numbers or special characters).',
         'string.empty': 'The category cannot be empty.',
         'any.required': 'The category is required.'
     }),

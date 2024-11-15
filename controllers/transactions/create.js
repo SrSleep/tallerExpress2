@@ -8,7 +8,7 @@ let createTransaction = async (req, res, next) => {
         return res.status(201).json({
             response: created
         })
-    }catch(error) {
+    } catch (error) {
         next(error)
     }
 }

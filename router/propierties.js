@@ -10,6 +10,7 @@ import deleteProperty from "../controllers/properties/delete.js";
 import validator from "../middlewares/validator.js";
 import userExists from "../middlewares/userExists.js";
 import propertyExists from "../middlewares/propertyExists.js";
+import passport from "../middlewares/passport.js";
 
 //Schemas
 import schemaPropertyCreate from "../schemas/properties/create.js";
@@ -18,9 +19,9 @@ import schemaPropertyDelete from "../schemas/properties/delete.js";
 
 const propertyRouter = Router();
 
-propertyRouter.get('/all', allProperties)
-propertyRouter.post('/create', validator(schemaPropertyCreate), userExists, createProperty)
-propertyRouter.put('/update', validator(schemaPropertyUpdate), userExists, updateProperty)
-propertyRouter.delete('/delete', validator(schemaPropertyDelete), propertyExists, deleteProperty)
+propertyRouter.get('/all', passport.authenticate('jwt', {session: false}), allProperties)
+propertyRouter.post('/create', passport.authenticate('jwt', {session: false}), validator(schemaPropertyCreate), userExists, createProperty)
+propertyRouter.put('/update', passport.authenticate('jwt', {session: false}), validator(schemaPropertyUpdate), userExists, updateProperty)
+propertyRouter.delete('/delete', passport.authenticate('jwt', {session: false}), validator(schemaPropertyDelete), propertyExists, deleteProperty)
 
 export default propertyRouter;

@@ -1,4 +1,5 @@
 import User from "../../models/User.js";
+
 let registerUser = async (req, res, next) => {
     try {
         let user = req.body

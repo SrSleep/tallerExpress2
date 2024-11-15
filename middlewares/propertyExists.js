@@ -1,6 +1,6 @@
 import Property from "../models/Property.js";
 
-export default async (req,res,next) => {
+export default async (req, res, next) => {
     try {
         let account = await Property.findOne({_id: req.body._id})
         if (!account) {
